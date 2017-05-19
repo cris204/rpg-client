@@ -1,8 +1,7 @@
-﻿
-using System;
-using Characters;
+﻿using Characters;
 using Services;
 using UnityEngine;
+using Utils;
 
 namespace CharacterSelection
 {
@@ -11,7 +10,7 @@ namespace CharacterSelection
 		[SerializeField]
 		private int size;
 		[SerializeField]
-		private float distance;
+		private GameObjectHorizontalLayout layout;
 		private Team team;
 
 		public static TeamManager Instance
@@ -27,11 +26,6 @@ namespace CharacterSelection
 		private void Start () 
 		{
 			ServicesFacade.Instance.FetchTeam (SetCurrentTeam);
-		}
-
-		private void OnDrawGizmos ()
-		{
-			Debug.DrawLine (transform.position, transform.position + Vector3.right * distance);
 		}
 
 		public void AddCharacter (CharacterData character)
@@ -60,6 +54,8 @@ namespace CharacterSelection
 		private void AddToLayout(CharacterData character)
         {
             SelectableCharacter selectable = Instantiate<SelectableCharacter> (character.prefab, transform);
+			selectable.character = character;
+			layout.Add (selectable.gameObject);
         }
 	}
 }

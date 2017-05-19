@@ -1,11 +1,17 @@
 ﻿using System;
+using Characters;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectableCharacter : MonoBehaviour, IPointerClickHandler
+namespace CharacterSelection
 {
-    public void OnPointerClick(PointerEventData eventData)
+    public class SelectableCharacter : MonoBehaviour, IPointerClickHandler
     {
-        throw new NotImplementedException();
+        public CharacterData character;
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log (gameObject.name);
+        }
     }
 }
