@@ -1,5 +1,4 @@
-﻿using System;
-using Characters;
+﻿using Characters;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +11,7 @@ namespace CharacterSelection
         public void OnPointerClick(PointerEventData eventData)
         {
             Debug.Log (gameObject.name);
+            CharacterDetailPanel.Instance.Show (character);
         }
     }
 }

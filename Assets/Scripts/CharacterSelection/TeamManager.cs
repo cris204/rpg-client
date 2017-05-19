@@ -1,6 +1,8 @@
-﻿using Characters;
+﻿using System;
+using Characters;
 using Services;
 using UnityEngine;
+using UnityRest;
 using Utils;
 
 namespace CharacterSelection
@@ -30,25 +32,34 @@ namespace CharacterSelection
 
 		public void AddCharacter (CharacterData character)
 		{
-			if (team == null || team.characters.Count == size) return;
+			if (team == null || team.characters.Count == size || HasSameCharacter (character.id)) return;
 			team.AddCharacter (character);
 			AddToLayout (character);
 		}
+
+        private bool HasSameCharacter(ObjectId id)
+        {
+			return team.characters.Find (character => character.id == id) != null;
+        }
 
         public void RemoveCharacter (CharacterData character)
 		{
 			if (team == null || team.characters.Count == 0) return;
 			team.RemoveCharacter (character);
+			layout.Remove ((gameObject) => gameObject.GetComponent<SelectableCharacter> ().character.id == character.id);
 		}
 
 		public void SaveTeam ()
 		{
+			if (team == null) return;
 			ServicesFacade.Instance.SaveTeam (team, () => Debug.Log ("Saved"));
 		}
 
 		private void SetCurrentTeam (Team team)
 		{
 			this.team = team;
+			foreach (CharacterData character in team.characters)
+				AddToLayout (character);
 		}
 
 		private void AddToLayout(CharacterData character)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,18 @@ namespace Utils
         public void RemoveAt (int index)
         {
             gameObjects.RemoveAt (index);
+            DoLayout ();
+        }
+
+        public void Remove (Func<GameObject, bool> predicate)
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+                if (predicate (gameObjects[i]))
+                {
+                    Destroy (gameObjects[i]);
+                    gameObjects.RemoveAt (i);
+                    i--;
+                }
             DoLayout ();
         }
 

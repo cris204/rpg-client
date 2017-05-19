@@ -12,5 +12,8 @@ namespace Characters
 		public ObjectId id;
 		public SelectableCharacter prefab;
 		public Sprite portrait;
+		public int lifepoints;
+		public int attackpoints;
+		public int defensepoints;
 	}
 }
