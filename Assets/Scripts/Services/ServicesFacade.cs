@@ -24,9 +24,15 @@ namespace Services
                 Destroy (gameObject);
         }
 
+        public void FetchGold(Action<int> onSuccess)
+        {
+            // TODO: Call get gold service
+            onSuccess (500);
+        }
+
         public void Login (string username, Action onSuccess)
         {
-            //TODO: Call login service using username, if successful invoke callback and set userId
+            // TODO: Call login service using username, if successful invoke callback and set userId
             userId = "1";
             onSuccess ();
         }
@@ -48,6 +54,12 @@ namespace Services
         {
             // TODO: Fetch unlocked characters service that returns the list with all available ids.
             onSuccess (new List<ObjectId> ());
+        }
+
+        public void PurchaseCharacter (ObjectId id, Action onSuccess)
+        {
+            // TODO: Call purchasing service.
+            onSuccess ();
         }
     }
 }

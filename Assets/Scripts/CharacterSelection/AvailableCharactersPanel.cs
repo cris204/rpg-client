@@ -18,8 +18,14 @@ namespace CharacterSelection
         private CharacterCatalog catalog;
         private Dictionary<string, AddCharacterButton> buttons;
 
+        public static AvailableCharactersPanel Instance
+        {
+            get; private set;
+        }
+
         private void Awake ()
         {
+            Instance = this;
             buttons = new Dictionary<string, AddCharacterButton> (catalog.characters.Length);
         }
 
@@ -31,16 +37,21 @@ namespace CharacterSelection
                 ServicesFacade.Instance.GetAvailableCharacters (SetAvailableCharacters);
         }
 
+        public void SetAvailableCharacters (List<ObjectId> availableIds)
+        {
+            foreach (ObjectId id in availableIds)
+            {
+                CharacterData character = buttons[id].character;
+                character.isAvailable = true;
+                buttons[id].Setup (character);
+            }
+        }
+
         private void SetupNewButton (CharacterData character)
         {
             AddCharacterButton button = Instantiate (prefab, panel);
             button.Setup (character, forceAvailable);
-        }
-
-        private void SetAvailableCharacters (List<ObjectId> availableIds)
-        {
-            foreach (ObjectId id in availableIds)
-                buttons[id].isAvailable = true;
+            buttons.Add (character.id, button);
         }
     }
 }

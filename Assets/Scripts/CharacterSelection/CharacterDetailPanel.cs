@@ -16,6 +16,11 @@ namespace CharacterSelection
         private Text defensepointsLabel;
         [SerializeField]
         private Image portrait;
+        [SerializeField]
+        private Button removeButton;
+        [SerializeField]
+        private Button purchaseButton;
+
         private CharacterData character;
 
         public static CharacterDetailPanel Instance
@@ -26,10 +31,6 @@ namespace CharacterSelection
         private void Awake ()
         {
             Instance = this;
-        }
-
-        private void Start ()
-        {
             Hide ();
         }
 
@@ -42,6 +43,7 @@ namespace CharacterSelection
             defensepointsLabel.text = character.defensepoints.ToString ();
             portrait.sprite = character.portrait;
             gameObject.SetActive (true);
+            SetActionButton (character);
         }
 
         public void Hide ()
@@ -53,6 +55,18 @@ namespace CharacterSelection
         {
             TeamManager.Instance.RemoveCharacter (character);
             Hide ();
+        }
+
+        public void PurchaseCurrentCharacter ()
+        {
+            CharacterPurchaser.Instance.StartPurchase (character);
+            Hide ();
+        }
+
+        private void SetActionButton(CharacterData character)
+        {
+            purchaseButton.gameObject.SetActive (!character.isAvailable);
+            removeButton.gameObject.SetActive (character.isAvailable);
         }
     }
 }

@@ -15,5 +15,7 @@ namespace Characters
 		public int lifepoints;
 		public int attackpoints;
 		public int defensepoints;
+		public bool isAvailable;
+		public int cost = 100;
 	}
 }

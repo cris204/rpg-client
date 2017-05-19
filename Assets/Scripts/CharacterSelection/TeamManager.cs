@@ -1,5 +1,4 @@
-﻿using System;
-using Characters;
+﻿using Characters;
 using Services;
 using UnityEngine;
 using UnityRest;

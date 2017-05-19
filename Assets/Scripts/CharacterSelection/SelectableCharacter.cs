@@ -10,7 +10,6 @@ namespace CharacterSelection
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log (gameObject.name);
             CharacterDetailPanel.Instance.Show (character);
         }
     }
