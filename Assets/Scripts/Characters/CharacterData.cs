@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityRest;
 
 namespace Characters
@@ -8,5 +9,7 @@ namespace Characters
 	{
 		public string name;
 		public ObjectId id;
+		public SelectableCharacter prefab;
+		public Sprite portrait;
 	}
 }
